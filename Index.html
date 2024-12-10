@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EDP Form</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="formbold-main-wrapper container">
+      <div class="formbold-form-wrapper">
+        <form id="submit-form">
+          <h1 class="heading"><span class="highlight">Register</span> Now</h1>
+          <div class="formbold-input-flex">
+            <div>
+              <input
+                type="text"
+                name="Name"
+                id="firstname"
+                placeholder="Enter Your Name"
+                class="formbold-form-input"
+              />
+              <label for="firstname" class="formbold-form-label"> Name </label>
+            </div>
+            <div>
+              <input
+                type="text"
+                name="ScholName"
+                id="scholName"
+                placeholder="Enter School Name "
+                class="formbold-form-input"
+              />
+              <label for="scholName" class="formbold-form-label">
+                School Name
+              </label>
+            </div>
+          </div>
+
+          <div class="formbold-input-flex">
+            <div>
+              <input
+                type="email"
+                name="Email"
+                id="email"
+                placeholder="adiuvaret@mail.com"
+                class="formbold-form-input"
+              />
+              <label for="email" class="formbold-form-label"> Email</label>
+            </div>
+            <div>
+              <input
+                type="number"
+                name="Phone"
+                id="phone"
+                placeholder="+91 1234567890"
+                class="formbold-form-input"
+              />
+              <label for="phone" class="formbold-form-label"> Phone </label>
+            </div>
+          </div>
+
+          <button class="formbold-btn">Register</button>
+        </form>
+        <!-- Thank You Section -->
+        <div class="thank-you" style="display: none; text-align: center">
+          <h2 class="highlight">Thank You!</h2>
+          <p>Your form has been submitted successfully.</p>
+          <p>Redirecting to the main site...</p>
+        </div>
+
+        <script>
+          // <!-- action="https://script.google.com/macros/s/AKfycbyFPbD1_RxQCUStkdOGggMs2HZX7KmUUQGByEvIH-ky0AKLpEJBbdGKTVRDwg_Ml-s0/exec" -->
+
+          const form = document.getElementById("submit-form");
+          const thankYouSection = document.querySelector(".thank-you");
+          const formWrapper = document.querySelector(".formbold-form-wrapper");
+
+          form.addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent the default form submission behavior
+
+            const formData = new FormData(form);
+
+            // Submit the form data via Fetch API
+            fetch(
+              "https://script.google.com/macros/s/AKfycbz3_malMMD2SSsZ69xtpoCLhPzsaTUIyZ0RZlWipQjocR4TeoSq7KxybbXQU12g4zxT/exec",
+              {
+                method: "POST",
+                body: formData,
+              },
+            )
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.result === "success") {
+                  // Hide the form and show the thank-you section
+                  form.style.display = "none";
+                  thankYouSection.style.display = "block";
+
+                  // Redirect to the main site after 5 seconds
+                  setTimeout(() => {
+                    window.location.href = "https://adiuvaretfoundation.com/";
+                  }, 5000);
+                } else {
+                  alert("Submission failed. Please try again.");
+                }
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+                alert("An error occurred. Please try again.");
+              });
+          });
+        </script>
+      </div>
+    </div>
+  </body>
+</html>
