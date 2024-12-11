@@ -10,11 +10,7 @@
   <body>
     <div class="formbold-main-wrapper container">
       <div class="formbold-form-wrapper">
-        <form
-          action="https://formsubmit.co/adiuvaret@gmail.com"
-          method="POST"
-          id="submit-form"
-        >
+        <form action="https://formsubmit.co/adiuvaret@gmail.com" method="post">
           <h1 class="heading"><span class="highlight">Register</span> Now</h1>
           <div class="formbold-input-flex">
             <div>
@@ -74,55 +70,46 @@
         </div>
 
         <script>
-          const form = document.getElementById("submit-form");
-          const thankYouSection = document.querySelector(".thank-you");
+          // <!-- action="https://script.google.com/macros/s/AKfycbyFPbD1_RxQCUStkdOGggMs2HZX7KmUUQGByEvIH-ky0AKLpEJBbdGKTVRDwg_Ml-s0/exec" -->
 
-          form.addEventListener("submit", function (e) {
-            e.preventDefault(); // Prevent the default form submission behavior
+          // const form = document.getElementById("submit-form");
+          // const thankYouSection = document.querySelector(".thank-you");
+          // const formWrapper = document.querySelector(".formbold-form-wrapper");
 
-            const formData = new FormData(form);
+          // form.addEventListener("submit", function (e) {
+          // e.preventDefault(); // Prevent the default form submission behavior
 
-            // Define URLs for the two endpoints
-            const formSubmitURL =
-              "https://formsubmit.co/adiuvaret@gmail.com";
-            const googleScriptURL =
-              "https://script.google.com/macros/s/AKfycbz3_malMMD2SSsZ69xtpoCLhPzsaTUIyZ0RZlWipQjocR4TeoSq7KxybbXQU12g4zxT/exec";
+          // const formData = new FormData(form);
 
-            // Function to send a POST request
-            const sendRequest = (url) => {
-              return fetch(url, {
-                method: "POST",
-                body: formData,
-              });
-            };
+          // Submit the form data via Fetch API
+          //   fetch(
+          //     // "https://script.google.com/macros/s/AKfycbz3_malMMD2SSsZ69xtpoCLhPzsaTUIyZ0RZlWipQjocR4TeoSq7KxybbXQU12g4zxT/exec",
+          //     "https://script.google.com/macros/s/AKfycbz3_malMMD2SSsZ69xtpoCLhPzsaTUIyZ0RZlWipQjocR4TeoSq7KxybbXQU12g4zxT/exec",
+          //     {
+          //       method: "POST",
+          //       body: formData,
+          //     }
+          //   )
+          //     .then((response) => response.json())
+          //     .then((data) => {
+          //       if (data.result === "success") {
+          //         // Hide the form and show the thank-you section
+          //         form.style.display = "none";
+          //         thankYouSection.style.display = "block";
 
-            // Execute both requests
-            Promise.all([
-              sendRequest(formSubmitURL),
-              sendRequest(googleScriptURL),
-            ])
-              .then((responses) =>
-                Promise.all(responses.map((res) => res.json()))
-              )
-              .then((data) => {
-                // Assuming both responses return a success message
-                if (data.every((d) => d.result === "success")) {
-                  form.style.display = "none"; // Hide the form
-                  thankYouSection.style.display = "block"; // Show the thank-you section
-
-                  // Redirect to the main site after 5 seconds
-                  setTimeout(() => {
-                    window.location.href = "https://adiuvaretfoundation.com/";
-                  }, 5000);
-                } else {
-                  alert("Submission failed. Please try again.");
-                }
-              })
-              .catch((error) => {
-                console.error("Error:", error);
-                alert("An error occurred. Please try again.");
-              });
-          });
+          //         // Redirect to the main site after 5 seconds
+          //         setTimeout(() => {
+          //           window.location.href = "https://adiuvaretfoundation.com/";
+          //         }, 5000);
+          //       } else {
+          //         alert("Submission failed. Please try again.");
+          //       }
+          //     })
+          //     .catch((error) => {
+          //       console.error("Error:", error);
+          //       alert("An error occurred. Please try again.");
+          //     });
+          // });
         </script>
       </div>
     </div>
