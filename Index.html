@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,7 +10,11 @@
   <body>
     <div class="formbold-main-wrapper container">
       <div class="formbold-form-wrapper">
-        <form id="submit-form">
+        <form
+          action="https://formsubmit.co/adiuvaret@gmail.com"
+          method="POST"
+          id="submit-form"
+        >
           <h1 class="heading"><span class="highlight">Register</span> Now</h1>
           <div class="formbold-input-flex">
             <div>
@@ -70,31 +74,41 @@
         </div>
 
         <script>
-          // <!-- action="https://script.google.com/macros/s/AKfycbyFPbD1_RxQCUStkdOGggMs2HZX7KmUUQGByEvIH-ky0AKLpEJBbdGKTVRDwg_Ml-s0/exec" -->
-
           const form = document.getElementById("submit-form");
           const thankYouSection = document.querySelector(".thank-you");
-          const formWrapper = document.querySelector(".formbold-form-wrapper");
 
           form.addEventListener("submit", function (e) {
             e.preventDefault(); // Prevent the default form submission behavior
 
             const formData = new FormData(form);
 
-            // Submit the form data via Fetch API
-            fetch(
-              "https://script.google.com/macros/s/AKfycbz3_malMMD2SSsZ69xtpoCLhPzsaTUIyZ0RZlWipQjocR4TeoSq7KxybbXQU12g4zxT/exec",
-              {
+            // Define URLs for the two endpoints
+            const formSubmitURL =
+              "https://formsubmit.co/166d4c04cbd09656bc5c5b3a7f65b7f6";
+            const googleScriptURL =
+              "https://script.google.com/macros/s/AKfycbz3_malMMD2SSsZ69xtpoCLhPzsaTUIyZ0RZlWipQjocR4TeoSq7KxybbXQU12g4zxT/exec";
+
+            // Function to send a POST request
+            const sendRequest = (url) => {
+              return fetch(url, {
                 method: "POST",
                 body: formData,
-              },
-            )
-              .then((response) => response.json())
+              });
+            };
+
+            // Execute both requests
+            Promise.all([
+              sendRequest(formSubmitURL),
+              sendRequest(googleScriptURL),
+            ])
+              .then((responses) =>
+                Promise.all(responses.map((res) => res.json()))
+              )
               .then((data) => {
-                if (data.result === "success") {
-                  // Hide the form and show the thank-you section
-                  form.style.display = "none";
-                  thankYouSection.style.display = "block";
+                // Assuming both responses return a success message
+                if (data.every((d) => d.result === "success")) {
+                  form.style.display = "none"; // Hide the form
+                  thankYouSection.style.display = "block"; // Show the thank-you section
 
                   // Redirect to the main site after 5 seconds
                   setTimeout(() => {
